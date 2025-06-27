@@ -29,6 +29,8 @@ test/
 npm install
 npm install --save-dev ts-node typescript
 
+npm install --save-dev @types/express
+
 ```
 
 ### Run Tests
