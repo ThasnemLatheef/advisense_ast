@@ -105,3 +105,19 @@ test("prints nested expression correctly", () => {
   );
   expect(expr.print()).toBe("((1 + 2) * 3)");
 });
+
+test("serializes and deserializes expression correctly", () => {
+  const expr = new BinaryOperationNode(
+    new BinaryOperationNode(new NumberNode(1), new NumberNode(2), "+"),
+    new NumberNode(3),
+    "*"
+  );
+
+  const json = JSON.stringify(expr.toJSON());
+  const parsed = JSON.parse(json);
+  const reconstructed = BinaryOperationNode.fromJSON(parsed);
+
+  expect(reconstructed.evaluate()).toBe(9);
+  expect(reconstructed.print()).toBe("((1 + 2) * 3)");
+});
+
